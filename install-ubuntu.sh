@@ -17,7 +17,7 @@ echo "Upgrading MobileInsight..."
 yes | ./uninstall.sh
 
 # Wireshark version to install
-ws_ver=3.4.0
+ws_ver=4.2.0
 
 # Use local library path
 #TODO
@@ -36,8 +36,8 @@ echo "Checking Wireshark sources to compile ws_dissector"
 if [ ! -d "${WIRESHARK_SRC_PATH}" ]; then
     echo "You do not have source codes for Wireshark version ${ws_ver}, downloading..."
 
-    wget  http://www.mobileinsight.net/wireshark-${ws_ver}-rbc-dissector.tar.xz -O wireshark-${ws_ver}.tar.xz
-    # wget https://www.wireshark.org/download/src/all-versions/wireshark-${ws_ver}.tar.xz
+    # wget  http://www.mobileinsight.net/wireshark-${ws_ver}-rbc-dissector.tar.xz -O wireshark-${ws_ver}.tar.xz
+    wget https://www.wireshark.org/download/src/all-versions/wireshark-${ws_ver}.tar.xz -O wireshark-${ws_ver}.tar.xz
     tar -xf wireshark-${ws_ver}.tar.xz
     rm wireshark-${ws_ver}.tar.xz
 fi
@@ -103,7 +103,7 @@ if [ -e "ws_dissector" ]; then
     rm -f ws_dissector
 fi
 g++ ws_dissector.cpp packet-aww.cpp -o ws_dissector `pkg-config --libs --cflags glib-2.0` \
-    -I"${WIRESHARK_SRC_PATH}" -L"${PREFIX}/lib" -lwireshark -lwsutil -lwiretap
+    -I"${WIRESHARK_SRC_PATH}" -I"${WIRESHARK_SRC_PATH}/include" -L"${PREFIX}/lib" -lwireshark -lwsutil -lwiretap
 strip ws_dissector
 
 echo "Installing Wireshark dissector to ${PREFIX}/bin"
