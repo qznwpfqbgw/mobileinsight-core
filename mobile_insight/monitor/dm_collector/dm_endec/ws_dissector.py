@@ -84,7 +84,7 @@ class WSDissector:
         "nr-rrc.ue_nr_cap": 412,
         "nr-rrc.sbcch.sl.bch": 413,
         "nr-rrc.scch": 414,
-        "nr-rrc.radio_bearer_conf": 415,
+        "nr-rrc.radiobearerconfig": 415,
         "nas-5gs":416,
     }
     _proc = None

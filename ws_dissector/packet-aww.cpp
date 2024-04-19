@@ -78,7 +78,7 @@ static void init_proto_names (const char *protos []) {
     protos[412] = "nr-rrc.ue_nr_cap";
     protos[413] = "nr-rrc.sbcch.sl.bch";
     protos[414] = "nr-rrc.scch";
-    protos[415] = "nr-rrc.radio_bearer_conf";
+    protos[415] = "nr-rrc.radiobearerconfig";
     protos[416] = "nas-5gs";
 }
 

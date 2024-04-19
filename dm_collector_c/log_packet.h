@@ -496,7 +496,7 @@ const ValueName NrRrcOtaPduType_v7[] = {
         {0x0a, "nr-rrc.ul.dcch"},   // RRC Reconfiguration Complete
         {0x08, "nr-rrc.ul.dcch"},   // Derived from measurement report (uplink, dedicated link)
         {0x09, "nr-rrc.rrc_reconf"}, // Reconfiguration message
-        {0x18, "nr-rrc.radio_bearer_conf"}, // Radio Bearer Config
+        {0x18, "nr-rrc.radiobearerconfig"}, // Radio Bearer Config
         // {0x00, "nr-rrc.ue_mrdc_cap"}, // unknown so far
         // {0x00, "nr-rrc.ue_nr_cap"}, // unknown so far
 };
@@ -515,7 +515,7 @@ const ValueName NrRrcOtaPduType_v8[] = {
         {0x0a, "nr-rrc.ul.dcch"},   // RRC Reconfiguration Complete
         {0x08, "nr-rrc.ul.dcch"},   // Derived from measurement report (uplink, dedicated link)
         {0x09, "nr-rrc.rrc_reconf"}, // Reconfiguration message
-        {0x1a, "nr-rrc.radio_bearer_conf"}, // Radio Bearer Config
+        {0x1a, "nr-rrc.radiobearerconfig"}, // Radio Bearer Config
         // {0x00, "nr-rrc.ue_mrdc_cap"}, // unknown so far
         // {0x00, "nr-rrc.ue_nr_cap"}, // unknown so far
 };
@@ -539,7 +539,7 @@ const ValueName NrRrcOtaPduType_v9[] = {
         {0x08, "nr-rrc.ul.dcch"},   // Derived from measurement report (uplink, dedicated link)
 	
        	{0x09, "nr-rrc.rrc_reconf"}, // Reconfiguration message
-        {0x19, "nr-rrc.radio_bearer_conf"}, // Radio Bearer Config
+        {0x19, "nr-rrc.radiobearerconfig"}, // Radio Bearer Config
         // {0x00, "nr-rrc.ue_mrdc_cap"}, // unknown so far
         // {0x00, "nr-rrc.ue_nr_cap"}, // unknown so far
 };
@@ -563,7 +563,7 @@ const ValueName NrRrcOtaPduType_v12[] = {
         {0x08, "nr-rrc.ul.dcch"},   // Derived from measurement report (uplink, dedicated link)
 	
        	{0x09, "nr-rrc.rrc_reconf"}, // Reconfiguration message
-        {0x19, "nr-rrc.radio_bearer_conf"}, // Radio Bearer Config
+        {0x19, "nr-rrc.radiobearerconfig"}, // Radio Bearer Config
         // {0x00, "nr-rrc.ue_mrdc_cap"}, // unknown so far
         // {0x00, "nr-rrc.ue_nr_cap"}, // unknown so far
 };
@@ -587,7 +587,7 @@ const ValueName NrRrcOtaPduType_v14[] = {
         {0x08, "nr-rrc.ul.dcch"},   // Derived from measurement report (uplink, dedicated link)
 	
        	{0x09, "nr-rrc.rrc_reconf"}, // Reconfiguration message
-        {0x19, "nr-rrc.radio_bearer_conf"}, // Radio Bearer Config
+        {0x19, "nr-rrc.radiobearerconfig"}, // Radio Bearer Config
         // {0x00, "nr-rrc.ue_mrdc_cap"}, // unknown so far
         // {0x00, "nr-rrc.ue_nr_cap"}, // unknown so far
 };
