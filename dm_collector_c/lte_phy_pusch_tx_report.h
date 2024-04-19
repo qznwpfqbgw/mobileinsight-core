@@ -2151,6 +2151,8 @@ static int _decode_lte_phy_pusch_tx_report_payload (const char *b,
             return offset - start;
         }
    case 144:
+   // FIXME: Check version 0xa1
+   case 0xa1:
    case 145:
         {
             offset += _decode_by_fmt(LtePhyPuschTxReport_Payload_v144,

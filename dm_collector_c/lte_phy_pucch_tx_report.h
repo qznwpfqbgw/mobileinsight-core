@@ -1125,6 +1125,8 @@ static int _decode_lte_phy_pucch_tx_report_payload (const char *b,
             Py_DECREF(result_record);
             return offset - start;
         }
+    // FIXME: Check version 161
+    case 161:
     case 142:
         {
             offset += _decode_by_fmt(LtePhyPucchTxReport_Payload_v142,

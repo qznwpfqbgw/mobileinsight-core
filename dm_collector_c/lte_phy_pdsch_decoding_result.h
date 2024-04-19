@@ -2626,6 +2626,8 @@ static int _decode_lte_phy_pdsch_decoding_result_payload (const char *b,
             Py_DECREF(result_record);
             return offset - start;
         }
+    // FIXME: Check version 0xa2
+    case 0xa2:
     case 143:
         {
             offset += _decode_by_fmt(LtePhyPdschDecodingResult_Payload_v143,

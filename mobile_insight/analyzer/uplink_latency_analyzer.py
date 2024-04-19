@@ -133,7 +133,7 @@ class UplinkLatencyAnalyzer(Analyzer):
                     SFN = sample['Sub FN']
                     FN = sample['Sys FN']
                     self.update_time(SFN, FN)
-                    if (sample['LCIDs'] == []):
+                    if (sample['LCIDs'] == [] or sample['LCIDs'] == None):
                         # print "error here!!"
                         continue
                     # print SFN, FN, self.sfn, self.fn

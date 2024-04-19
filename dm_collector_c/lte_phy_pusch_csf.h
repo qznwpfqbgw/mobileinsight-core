@@ -718,7 +718,8 @@ static int _decode_lte_phy_pusch_csf_payload (const char *b,
 
             return offset - start;
         }
-
+    // FIXME: Check version 0xa3
+    case 0xa3:
     case 103:
         {
             offset += _decode_by_fmt(LtePhyPuschCsf_Payload_v103,

@@ -1366,6 +1366,8 @@ static int _decode_lte_pdsch_stat_indication_payload (const char *b,
             Py_DECREF(result_record);
             return offset - start;
         }
+        // FIXME: Check the version 0x30
+    case 0x30:
     case 40:
         {
             offset += _decode_by_fmt(LtePdschStatIndication_Payload_v40,

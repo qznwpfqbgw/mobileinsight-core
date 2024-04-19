@@ -619,6 +619,8 @@ static int _decode_lte_phy_pucch_csf_payload (const char *b,
                     "(MI)Unknown");
             return offset - start;
         }
+    // FIXME: Check version 0xa2
+    case 0xa2:
     case 142:
         {
             offset += _decode_by_fmt(LtePhyPucchCsf_Payload_v142,

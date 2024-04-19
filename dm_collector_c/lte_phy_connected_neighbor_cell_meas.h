@@ -414,6 +414,195 @@ static int _decode_lte_phy_connected_neighbor_cell_meas_payload (const char *b,
                     Py_DECREF(result_cell);
 
 
+                } else if (subpkt_id == 31 && subpkt_ver == 40) {
+                    // this is connected mode neighbor cell measurement
+                    // response v4
+                    offset += _decode_by_fmt(
+                            LtePhyCncm_Subpacket_Payload_31v3,
+                            ARRAY_SIZE(LtePhyCncm_Subpacket_Payload_31v3,
+                                Fmt),
+                            b, offset, length, result_subpkt);
+                    temp = _search_result_int(result_subpkt, "Num Cells");
+                    int num_cells = temp & 63;  // 6 bits
+                    // skip 1 bit
+                    int duplexingMode = (temp >> 7) & 3;    // 2 bits
+                    int servingCellIndx = (temp >> 9) & 15; // 4 bits
+                    old_object = _replace_result_int(result_subpkt,
+                            "Num Cells", num_cells);
+                    Py_DECREF(old_object);
+                    old_object = _replace_result_int(result_subpkt,
+                            "Deplexing Mode", duplexingMode);
+                    Py_DECREF(old_object);
+                    (void)_map_result_field_to_name(result_subpkt,
+                            "Deplexing Mode",
+                            ValueNameDuplexingMode,
+                            ARRAY_SIZE(ValueNameDuplexingMode, ValueName),
+                            "(MI)Unknown");
+                    old_object = _replace_result_int(result_subpkt,
+                            "Serving Cell Index", servingCellIndx);
+                    Py_DECREF(old_object);
+                    (void)_map_result_field_to_name(result_subpkt,
+                            "Serving Cell Index",
+                            ValueNameCellIndex,
+                            ARRAY_SIZE(ValueNameCellIndex, ValueName),
+                            "(MI)Unknown");
+
+                    PyObject *result_cell = PyList_New(0);
+                    for (int j = 0; j < num_cells; j++) {
+                        PyObject *result_cell_item = PyList_New(0);
+
+                        offset += _decode_by_fmt(LtePhyCncm_Subpacket_31v3_cell,
+                                ARRAY_SIZE(LtePhyCncm_Subpacket_31v3_cell,
+                                    Fmt),
+                                b, offset, length, result_cell_item);
+                        unsigned int utemp = _search_result_uint(
+                                result_cell_item, "Physical Cell ID");
+                        int iPhysicalCellId = utemp & 1023;  // 10 bits
+                        int iFTLCFO = (utemp >> 10) & 65535; // 16 bits
+                        old_object = _replace_result_int(result_cell_item,
+                                "Physical Cell ID", iPhysicalCellId);
+                        Py_DECREF(old_object);
+                        old_object = _replace_result_int(result_cell_item,
+                                "FTL Cumulative Freq Offset", iFTLCFO);
+                        Py_DECREF(old_object);
+
+                        temp = _search_result_int(result_cell_item,
+                                "Inst Measured RSRP");
+                        float RSRP = float(temp & 4095);
+                        RSRP = RSRP * 0.0625 - 180.0;
+                        pyfloat = Py_BuildValue("f", RSRP);
+                        old_object = _replace_result(result_cell_item,
+                                "Inst Measured RSRP", pyfloat);
+                        Py_DECREF(old_object);
+                        Py_DECREF(pyfloat);
+
+                        utemp = _search_result_uint(result_cell_item,
+                                "Inst Measured RSRQ");
+                        float RSRQ = float((utemp >> 10) & 1023);
+                        RSRQ = RSRQ * 0.0625 - 30.0;
+                        pyfloat = Py_BuildValue("f", RSRQ);
+                        old_object = _replace_result(result_cell_item,
+                                "Inst Measured RSRQ", pyfloat);
+                        Py_DECREF(old_object);
+                        Py_DECREF(pyfloat);
+
+                        utemp = _search_result_uint(result_cell_item,
+                                "Inst Measured RSSI");
+                        float RSSI = float((utemp >> 11) & 2047);
+                        RSSI = RSSI * 0.0625 - 110.0;
+                        pyfloat = Py_BuildValue("f", RSSI);
+                        old_object = _replace_result(result_cell_item,
+                                "Inst Measured RSSI", pyfloat);
+                        Py_DECREF(old_object);
+                        Py_DECREF(pyfloat);
+
+                        PyObject *t3 = Py_BuildValue("(sOs)", "Ignored",
+                                result_cell_item, "dict");
+                        PyList_Append(result_cell, t3);
+                        Py_DECREF(t3);
+                        Py_DECREF(result_cell_item);
+                    }
+                    PyObject *t2 = Py_BuildValue("(sOs)", "Neighbor Cells",
+                            result_cell, "list");
+                    PyList_Append(result_subpkt, t2);
+                    Py_DECREF(t2);
+                    Py_DECREF(result_cell);
+
+                } else if (subpkt_id == 31 && subpkt_ver == 24) {
+                    // this is connected mode neighbor cell measurement
+                    // response v4
+                    offset += _decode_by_fmt(
+                            LtePhyCncm_Subpacket_Payload_31v4,
+                            ARRAY_SIZE(LtePhyCncm_Subpacket_Payload_31v4,
+                                Fmt),
+                            b, offset, length, result_subpkt);
+                    temp = _search_result_int(result_subpkt, "Num Cells");
+                    int num_cells = temp & 63;  // 6 bits
+                    // skip 1 bit
+                    int duplexingMode = (temp >> 7) & 3;    // 2 bits
+                    int servingCellIndx = (temp >> 9) & 15; // 4 bits
+                    old_object = _replace_result_int(result_subpkt,
+                            "Num Cells", num_cells);
+                    Py_DECREF(old_object);
+                    old_object = _replace_result_int(result_subpkt,
+                            "Deplexing Mode", duplexingMode);
+                    Py_DECREF(old_object);
+                    (void)_map_result_field_to_name(result_subpkt,
+                            "Deplexing Mode",
+                            ValueNameDuplexingMode,
+                            ARRAY_SIZE(ValueNameDuplexingMode, ValueName),
+                            "(MI)Unknown");
+                    old_object = _replace_result_int(result_subpkt,
+                            "Serving Cell Index", servingCellIndx);
+                    Py_DECREF(old_object);
+                    (void)_map_result_field_to_name(result_subpkt,
+                            "Serving Cell Index",
+                            ValueNameCellIndex,
+                            ARRAY_SIZE(ValueNameCellIndex, ValueName),
+                            "(MI)Unknown");
+
+                    PyObject *result_cell = PyList_New(0);
+                    for (int j = 0; j < num_cells; j++) {
+                        PyObject *result_cell_item = PyList_New(0);
+
+                        offset += _decode_by_fmt(LtePhyCncm_Subpacket_31v4_cell,
+                                ARRAY_SIZE(LtePhyCncm_Subpacket_31v4_cell,
+                                    Fmt),
+                                b, offset, length, result_cell_item);
+                        unsigned int utemp = _search_result_uint(
+                                result_cell_item, "Physical Cell ID");
+                        int iPhysicalCellId = utemp & 1023;  // 10 bits
+                        int iFTLCFO = (utemp >> 10) & 65535; // 16 bits
+                        old_object = _replace_result_int(result_cell_item,
+                                "Physical Cell ID", iPhysicalCellId);
+                        Py_DECREF(old_object);
+                        old_object = _replace_result_int(result_cell_item,
+                                "FTL Cumulative Freq Offset", iFTLCFO);
+                        Py_DECREF(old_object);
+
+                        temp = _search_result_int(result_cell_item,
+                                "Inst Measured RSRP");
+                        float RSRP = float(temp & 4095);
+                        RSRP = RSRP * 0.0625 - 180.0;
+                        pyfloat = Py_BuildValue("f", RSRP);
+                        old_object = _replace_result(result_cell_item,
+                                "Inst Measured RSRP", pyfloat);
+                        Py_DECREF(old_object);
+                        Py_DECREF(pyfloat);
+
+                        utemp = _search_result_uint(result_cell_item,
+                                "Inst Measured RSRQ");
+                        float RSRQ = float((utemp >> 10) & 1023);
+                        RSRQ = RSRQ * 0.0625 - 30.0;
+                        pyfloat = Py_BuildValue("f", RSRQ);
+                        old_object = _replace_result(result_cell_item,
+                                "Inst Measured RSRQ", pyfloat);
+                        Py_DECREF(old_object);
+                        Py_DECREF(pyfloat);
+
+                        utemp = _search_result_uint(result_cell_item,
+                                "Inst Measured RSSI");
+                        float RSSI = float((utemp >> 11) & 2047);
+                        RSSI = RSSI * 0.0625 - 110.0;
+                        pyfloat = Py_BuildValue("f", RSSI);
+                        old_object = _replace_result(result_cell_item,
+                                "Inst Measured RSSI", pyfloat);
+                        Py_DECREF(old_object);
+                        Py_DECREF(pyfloat);
+
+                        PyObject *t3 = Py_BuildValue("(sOs)", "Ignored",
+                                result_cell_item, "dict");
+                        PyList_Append(result_cell, t3);
+                        Py_DECREF(t3);
+                        Py_DECREF(result_cell_item);
+                    }
+                    PyObject *t2 = Py_BuildValue("(sOs)", "Neighbor Cells",
+                            result_cell, "list");
+                    PyList_Append(result_subpkt, t2);
+                    Py_DECREF(t2);
+                    Py_DECREF(result_cell);
+
+
                 } else {
                     printf("(MI)Unknown LTE PHY Connected Neighbor Cell Meas"
                             " subpkt id and version: %d - %d\n",
