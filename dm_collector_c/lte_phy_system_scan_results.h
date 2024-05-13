@@ -81,6 +81,8 @@ static int _decode_lte_phy_system_scan_results_payload (const char *b,
             Py_DECREF(result_record);
             return offset - start;
         }
+    // FIXME: check version 0x29
+    case 0x29:
     case 32:
         {
             offset += _decode_by_fmt(LtePhySystemScanResults_Payload_v32,
