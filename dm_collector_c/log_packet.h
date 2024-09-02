@@ -2888,7 +2888,9 @@ const Fmt LteMacRachAttempt_SubpktPayload_v3[] = {
 };
 
 const Fmt LteMacRachAttempt_SubpktPayload_v4[] = {
-        // Version 2
+        // Version 3
+        {UINT, "Sub Id",               1},
+        {UINT, "Cell Id",              1},
         {UINT, "Retx counter",         1},
         {UINT, "Rach result",          1},
         {UINT, "Contention procedure", 1},

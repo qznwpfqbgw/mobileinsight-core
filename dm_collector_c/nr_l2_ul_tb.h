@@ -366,6 +366,7 @@ _decode_nr_l2_ul_tb_subpkt(const char* b, int offset, size_t length,
 	PyObject* t = NULL;
 	switch (pkt_ver)
 	{
+	case 131073:
 	case 4:
 		offset += _decode_by_fmt(NrMeta_Fmt_v4,
 			ARRAY_SIZE(NrMeta_Fmt_v4, Fmt),

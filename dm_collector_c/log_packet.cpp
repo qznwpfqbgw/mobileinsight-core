@@ -3156,8 +3156,9 @@ _decode_lte_phy_subpkt(const char *b, int offset, size_t length,
                                 success = true;
                                 break;
                             }
-                            // FIXME: Check version 48
+                            // FIXME: Check version 48, 50
                             case 48:
+                            case 50:
                             case 40: {
                                 offset += _decode_by_fmt(
                                         LtePhySubpktFmt_v1_Scmr_v40,
@@ -7717,6 +7718,21 @@ static int _decode_lte_mac_rach_trigger_subpkt(const char *b, int offset,
                                                      ValueNameRachContention,
                                                      ARRAY_SIZE(ValueNameRachContention, ValueName),
                                                      "(MI)Unknown");
+                } else if (subpkt_id == 3 && subpkt_ver == 8) {
+                    offset += _decode_by_fmt(
+                            LteMacRachTrigger_RachReasonSubpktPayload_v2,
+                            ARRAY_SIZE(LteMacRachTrigger_RachReasonSubpktPayload_v2,
+                                       Fmt),
+                            b, offset, length, result_subpkt);
+                    (void) _map_result_field_to_name(result_subpkt, "Rach reason",
+                                                     LteMacRachTrigger_RachReasonSubpkt_RachReason,
+                                                     ARRAY_SIZE(LteMacRachTrigger_RachReasonSubpkt_RachReason,
+                                                                ValueName),
+                                                     "(MI)Unknown");
+                    (void) _map_result_field_to_name(result_subpkt, "RACH Contention",
+                                                     ValueNameRachContention,
+                                                     ARRAY_SIZE(ValueNameRachContention, ValueName),
+                                                     "(MI)Unknown");
                 } else {
                     printf("(MI)Unknown LTE MAC RACH Trigger subpkt id and "
                            "version: 0x%x - %d\n", subpkt_id, subpkt_ver);
@@ -9198,8 +9214,9 @@ static int _decode_lte_pdcp_dl_stats_subpkt(const char *b, int offset,
     int n_subpkt = _search_result_int(result, "Num Subpkt");
 
     switch (pkt_ver) {
-        // FIXME: Check version 0x33
+        // FIXME: Check version 0x33, 0x34
         case 0x33:
+        case 0x34:
         case 1: {
             PyObject *result_allpkts = PyList_New(0);
             for (int i = 0; i < n_subpkt; i++) {
