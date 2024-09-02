@@ -62,6 +62,8 @@ static int _decode_nr_l2_ul_bsr_payload (const char *b,
     PyObject *old_object;
 
     switch (pkt_ver) {
+	// FIXME: Check version x20002
+	case 0x20002:
     case 2:
         {
 
