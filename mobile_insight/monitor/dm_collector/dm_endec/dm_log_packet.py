@@ -18,11 +18,12 @@ try:
     from utils import *
 except ImportError as e:
     # TODO: WTF can I do to remove this dependence ..?
-    def static_var(varname, value):
-        def decorate(func):
-            setattr(func, varname, value)
-            return func
-        return decorate
+    pass
+def static_var(varname, value):
+    def decorate(func):
+        setattr(func, varname, value)
+        return func
+    return decorate
 
 from .ws_dissector import *
 
